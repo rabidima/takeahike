@@ -10,16 +10,17 @@
   </style> 
 
 	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.js'></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtT4eWLXeyD60i6eAkY4cXttJMmyPqPPo&libraries=places"></script>
   	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.css' rel='stylesheet' />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:800" rel="stylesheet">
+
 </head>
 <body>
 <div class="wrapper">
 		<div class="container">
+
 			<form name="searchForm" class="input-group">
-		    	<input type="text" id="search" class="form-control"  placeholder="Search">
+		    	<input type="text" id="pac-input" class="form-control"  placeholder="Enter a city or zip code">
 					<span class="input-group-btn">
 						<button class="btn btn-secondary" id="submit" type="sumbit">
 							<span class="glyphicon glyphicon-search"></span>
@@ -33,8 +34,8 @@
 	</div>
 
 
-
-<script>
+<!-- <script>
+// MAPBOX STYLE
   mapboxgl.accessToken = 'pk.eyJ1IjoiZGFtaWVud3JpZ2h0IiwiYSI6ImNpdTdvYjlhazAwMGUzM28wdGd5MnYwbDcifQ.Q0yTEMl-dyTpCvVoi87jNA';
   var map = new mapboxgl.Map({
       container: 'map',
@@ -42,9 +43,10 @@
       center: [-118, 34],
       zoom: 9
   });
-</script>
-	<script src="https://code.jquery.com/jquery.js"></script>
+</script> -->
 
+
+	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
 	<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.0/imagesloaded.pkgd.min.js"></script>
