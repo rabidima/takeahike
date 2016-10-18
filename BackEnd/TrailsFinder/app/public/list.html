@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>List of Trails</title>
+
+	<!-- Latest compiled and minified CSS & JS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+	<div class="container">
+		
+		<div class="jumbotron">
+			<h1 class="text-center"><span class="glyphicon glyphicon-fire"></span> List Of Trails</h1>
+			<hr>
+			<h2 class="text-center"> FROM Transit and Trails API </h2>
+			<br>
+
+			<div class="text-center">
+				<a href="/survey"><button type="button" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-credit-card"></span> Create Trail</button></a>		
+				<a href="/"><button type="button" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-home"></span></button></a>	
+				<button id="zipcodeBtn" type="button" class="btn btn-lg btn-success">See Trails</button>
+    			<p id="trailN"></p>
+    	
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-12">
+
+				<!-- List of friends -->
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">Trails</h4>
+					</div>
+					<div class="panel-body" id="trailsDiv">
+					</div>
+				</div>
+	
+			</div>
+		</div>
+
+
+	    <footer class="footer">
+	      <div class="container">
+	      	<p>Control Panel</p>
+	        <p><a href="/" id="clear">Home</a> | <a href="/listoffriends">List</a> | <a href="https://github.com">GitHub Repo</a></p>
+	      </div>
+	    </footer>
+
+	</div>
+	
+</body>
+
+
+<script type="text/javascript">
+
+	// In this code, jQuery is used to "download" the data from our server
+
+	function runFriendslist(){
+
+		// Here we get the location of the root page. 
+		var currentURL = window.location.origin;
+
+		// The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
+		$.ajax({url: currentURL + "/api/friends", method: "GET"}) 
+			.done(function(friendsList) {
+
+				
+				console.log("friendsList=" + friendsList);
+				console.log("------------------------------------")
+
+				// Loop through and display each of the friends 
+				for (var i=0; i<friendsList.length; i++){
+
+					// Create the HTML Well (Section) and Add the table content for each friend
+					var trailsDiv = $("<div>");
+					trailsDiv.addClass('well');
+					trailsDiv.attr('id', 'tableWell-' + i+1)
+					$('#trailsDiv').append(trailsDiv);
+
+					var trailNum = i + 1;
+
+					
+					// Then display the remaining fields in the HTML (Section Name, Date, URL)
+					$("#tableWell-"+ i+1).append('<h2><span class="label label-primary">' + trailNum + "</span> | " + "</h2>");
+
+				// $("#tableWell-"+ i+1).append('<h2><span class="label label-primary">' + trailNum + "</span> | " + friendsList[i].name + "</h2>");
+						
+				}
+			});
+	}
+
+	
+
+	// This function resets all of the data in list. 
+	function clearList(){
+
+		var currentURL = window.location.origin;
+		$.ajax({url: currentURL + "/api/clear", method: "POST"}) 
+
+	}
+
+	$("#clear").on('click', function(){
+		alert("Clearing...");
+		clearList();
+
+		// Refresh the page after data is cleared
+		location.reload();
+	})
+
+
+	// Run Queries
+	// ==========================================
+	// runFriendslist();
+	
+
+
+     $('#zipcodeBtn').on('click', function(event) {
+                   
+		console.log('hit');
+
+		    
+
+  //           // Here we get the location of the root page. 
+		var currentURL = window.location.origin;
+		console.log(currentURL)
+		// // The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
+		$.ajax({url: currentURL + "/api/trails", method: "GET"}) 
+			.done(function(trailsList) {
+				var trails = JSON.parse(trailsList);
+
+				console.log("-trailsList.length- :" + trails.length);
+
+				console.log("trailsList= " + trailsList);
+				
+		// 		// Loop through and display each of the friends 
+				for (var i=0; i<trails.length; i++){
+
+		// // 			// Create the HTML Well (Section) and Add the table content for each friend
+					var trailsDiv = $("<div>");
+					trailsDiv.addClass('well');
+					trailsDiv.attr('id', 'tableWell-' + i);
+					$('#trailsDiv').append(trailsDiv);
+
+					var trailNum = i + 1;
+
+					
+		// // 			// Then display the remaining fields in the HTML (Section Name, Date, URL)
+					$("#tableWell-" + i).append('<h2><span class="label label-primary">' + trailNum + "</span> | " + "<a>" + trails[i].name + "</a>" + "</h2>");
+
+				 }
+				  
+				});
+ 
+       }); //on click function       
+           
+			
+
+// var TransitAndTrails = require("transitandtrails");
+
+// var tnt = new TransitAndTrails({
+//   key: "2e5b17ab10f75e98ad4802a9301e8e7c253d3a4c50736c63e1d91170c7106550"
+// });
+
+// tnt.getTrailhead(292, function(err, trailhead) {
+//   if (err) {
+//     throw err;
+//   }
+
+//   console.log(trailhead);
+// });
+
+//     var apiURL = "https://api.transitandtrails.org/api/v1/trailheads?key=2e5b17ab10f75e98ad4802a9301e8e7c253d3a4c50736c63e1d91170c7106550&limit=5";
+//   // var apiURL = "https://prescriptiontrails.org/api/filter/?zip=87102&by=zip&offset=0&count=6";
+       
+// 		  $.ajax({
+//                 url: apiURL, 
+//                 dataType: "jsonp",
+//                 success: function(response)
+//                         {
+//                             console.log("success!!");
+                           
+//                         },
+//                  error: function(error)
+//                         {
+//                             console.log("Error", error);
+//                         }
+//                     }).done(function(data) {
+//                 // $("#trailN").text(data);
+                
+//                 console.log('AJAX');
+//                 //console.log(data);
+// // https://api.transitandtrails.org/api/v1/trailheads?key=2e5b17ab10f75e98ad4802a9301e8e7c253d3a4c50736c63e1d91170c7106550&limit=5&callback=jQuery111109192686312221359_1476643746662&_=1476643746663
+           
+//                 // console.log(JSON.stringify(data));
+                
+//             })    
+      
+  
+
+
+
+</script>
+</html>
