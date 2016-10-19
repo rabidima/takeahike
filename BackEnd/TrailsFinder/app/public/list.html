@@ -23,9 +23,10 @@
 			<div class="text-center">
 				<a href="/survey"><button type="button" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-credit-card"></span> Create Trail</button></a>		
 				<a href="/"><button type="button" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-home"></span></button></a>	
-				<button id="zipcodeBtn" type="button" class="btn btn-lg btn-success">See Trails</button>
+				<button id="zipcodeBtn" type="button" class="btn btn-lg btn-success">NPM Trails</button>
     			<p id="trailN"></p>
-    	
+    			<button id="apiBtn" type="button" class="btn btn-lg btn-success">API Trails</button>
+    				
 			</div>
 		</div>
 
@@ -59,44 +60,6 @@
 
 <script type="text/javascript">
 
-	// In this code, jQuery is used to "download" the data from our server
-
-	function runFriendslist(){
-
-		// Here we get the location of the root page. 
-		var currentURL = window.location.origin;
-
-		// The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
-		$.ajax({url: currentURL + "/api/friends", method: "GET"}) 
-			.done(function(friendsList) {
-
-				
-				console.log("friendsList=" + friendsList);
-				console.log("------------------------------------")
-
-				// Loop through and display each of the friends 
-				for (var i=0; i<friendsList.length; i++){
-
-					// Create the HTML Well (Section) and Add the table content for each friend
-					var trailsDiv = $("<div>");
-					trailsDiv.addClass('well');
-					trailsDiv.attr('id', 'tableWell-' + i+1)
-					$('#trailsDiv').append(trailsDiv);
-
-					var trailNum = i + 1;
-
-					
-					// Then display the remaining fields in the HTML (Section Name, Date, URL)
-					$("#tableWell-"+ i+1).append('<h2><span class="label label-primary">' + trailNum + "</span> | " + "</h2>");
-
-				// $("#tableWell-"+ i+1).append('<h2><span class="label label-primary">' + trailNum + "</span> | " + friendsList[i].name + "</h2>");
-						
-				}
-			});
-	}
-
-	
-
 	// This function resets all of the data in list. 
 	function clearList(){
 
@@ -116,7 +79,6 @@
 
 	// Run Queries
 	// ==========================================
-	// runFriendslist();
 	
 
 
@@ -128,9 +90,57 @@
 
   //           // Here we get the location of the root page. 
 		var currentURL = window.location.origin;
-		console.log(currentURL)
+		console.log("currentURL : " + currentURL);
+
 		// // The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
-		$.ajax({url: currentURL + "/api/trails", method: "GET"}) 
+		$.ajax({url: currentURL + "/api/trailsnpm", method: "GET"}) 
+			.done(function(trailsList) {
+				console.log("trailList" + trailsList);
+
+				
+				var trailsName = JSON.stringify(trailsList.name);
+				var trailsDesc = JSON.stringify(trailsList.description.replace(/[\n\t\r]/g,""));
+				var trailsFull = JSON.stringify(trailsList);
+				// console.log("-trailsList.length- :" + trails.length);
+
+				console.log("trails= " + trailsName);
+     			console.log("Description= " + trailsDesc);
+			// console.log("TrailsNum= " + trailsNum);
+		// // 		// Loop through and display each of the friends 
+		// 		for (var i=0; i<trailsNum; i++){
+
+		// // // 			// Create the HTML Well (Section) and Add the table content for each friend
+					var trailsDiv = $("<div>");
+					trailsDiv.addClass('well');
+					trailsDiv.attr('id', 'tableWell-');
+					$('#trailsDiv').append(trailsDiv);
+
+		// 			var trailsNum = i + 1;
+
+					
+		// // 			// Then display the remaining fields in the HTML (Section Name, Date, URL)
+					$("#tableWell-" ).append('<h2><span class="label label-primary">'+ trailsName + "</span></h2> " +  "<h3>" + trailsFull + "</h3>");
+
+				 // }
+				  
+				});
+ 
+       }); //on click function       
+           
+// -----------------------------------
+
+
+     $('#apiBtn').on('click', function(event) {
+                   
+		console.log('hit');
+
+		    
+
+  //           // Here we get the location of the root page. 
+		var currentURL = window.location.origin;
+		console.log("currentURL : " + currentURL)
+		// // The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
+		$.ajax({url: currentURL + "/api/trailsapi", method: "GET"}) 
 			.done(function(trailsList) {
 				var trails = JSON.parse(trailsList);
 
@@ -158,8 +168,7 @@
 				});
  
        }); //on click function       
-           
-			
+
 
 // var TransitAndTrails = require("transitandtrails");
 
