@@ -23,7 +23,7 @@ $(document).ready(function() {
 		      		var lat = response.results["0"].geometry.location.lat;
       				var long = response.results["0"].geometry.location.lng;		
 					console.log('Latitude:', lat, 'Longitude:', long);
-					return lat, long;
+					getTrails(long, lat);
 				}
 			}	
 		
@@ -31,6 +31,18 @@ $(document).ready(function() {
 			return false;
 	});
 
+
+  // $.ajax({
+  //   url: `${currentURL}/api/trailsapi/${long}/${lat}`,
+  //   method: 'GET',
+  // }).done(function(response) {
+
+  // });
+
+  function getTrails(long, lat) {
+    var currentURL = window.location.origin;
+    $.get(`${currentURL}/api/trailsapi/${long}/${lat}`)
+  }
 
 	// Display and Update Google Map based on search location
 	function initAutocomplete() {
