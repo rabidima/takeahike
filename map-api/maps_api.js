@@ -32,16 +32,13 @@ $(document).ready(function() {
 	});
 
 
-  // $.ajax({
-  //   url: `${currentURL}/api/trailsapi/${long}/${lat}`,
-  //   method: 'GET',
-  // }).done(function(response) {
-
-  // });
-
   function getTrails(long, lat) {
     var currentURL = window.location.origin;
-    $.get(`${currentURL}/api/trailsapi/${long}/${lat}`)
+    $.get(`http://localhost:3000/api/trailsapi/${long}/${lat}`, function(data) {
+      console.log('data', data)
+    })
+
+
   }
 
 	// Display and Update Google Map based on search location

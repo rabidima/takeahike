@@ -20,6 +20,7 @@ module.exports = function (app) {
 	});
 
 	app.get('/listoftrails', function (req, res) {
+		console.log('hit');
 			res.sendFile(path.join(__dirname + '/../public/list.html'));
 		});
 	
