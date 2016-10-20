@@ -1,5 +1,13 @@
 $(document).ready(function() {
 
+    var locations = [
+      ['Place 1', 34.1517492, -118.5214282, 1],
+      ['Place 2', 34.0194543, -118.4911912, 2],
+      ['Place 3', 34.0736204, -118.4003563, 3],
+      ['Place 4', 34.0609876, -118.3023579, 4],
+      ['Place 5', 34.0211224, -118.3964665, 5]
+    ];
+
 // var zipcode = $('#search').val().trim();
 
 // var queryURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=$' + zipcode + '&sensor=false';
@@ -32,6 +40,7 @@ $(document).ready(function() {
 	});
 
 
+
   function getTrails(long, lat) {
     var currentURL = window.location.origin;
     $.get(`http://localhost:3000/api/trailsapi/${long}/${lat}`, function(data) {
@@ -43,20 +52,47 @@ $(document).ready(function() {
 
 	// Display and Update Google Map based on search location
 	function initAutocomplete() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 34.0522342, lng: -118.2436849},
-          zoom: 10,
-          mapTypeId: 'terrain'
-        });
+      
+      // Stack code ===========
+var map = new google.maps.Map(document.getElementById('map'), {
+     zoom: 12,
+     center: {lat: 34.0522342, lng: -118.2436849},
+     mapTypeId: 'terrain'
+});
+
+var infowindow = new google.maps.InfoWindow;
+
+var marker, i;
+
+for (i = 0; i < locations.length; i++) {  
+    marker = new google.maps.Marker({
+         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+         map: map
+    });
+
+    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+         return function() {
+             infowindow.setContent(locations[i][0]);
+             infowindow.open(map, marker);
+         }
+    })(marker, i));
+}
+      // =======================
+
+        // var map = new google.maps.Map(document.getElementById('map'), {
+        //   center: {lat: 34.0522342, lng: -118.2436849},
+        //   zoom: 10,
+        //   mapTypeId: 'terrain'
+        // });
             
-         if(navigator.geolocation) {
-         	navigator.geolocation.getCurrentPosition(function(position) {
-         		var pos = {
-         			lat: position.coords.latitude,
-         			lng: position.coords.longitude
-         		}
-         	});
-         }     
+        //  if(navigator.geolocation) {
+        //  	navigator.geolocation.getCurrentPosition(function(position) {
+        //  		var pos = {
+        //  			lat: position.coords.latitude,
+        //  			lng: position.coords.longitude
+        //  		}
+        //  	});
+        //  }     
 
         // Create the search box and link it to the UI element.
         var input = document.getElementById('pac-input');
