@@ -9,12 +9,16 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/foundation.min.css">
 		<link href='http://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css' rel='stylesheet' type='text/css'>
 		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.css' rel='stylesheet'>
-
+		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.js'></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtT4eWLXeyD60i6eAkY4cXttJMmyPqPPo&libraries=places"></script>
+	  	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.css' rel='stylesheet' />
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.js'></script>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtT4eWLXeyD60i6eAkY4cXttJMmyPqPPo&libraries=places"></script>
 		<script type="text/javascript" src="maps_api.js"></script>
-  
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.0/imagesloaded.pkgd.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.1/isotope.pkgd.min.js"></script>
 		<!--doesnt work--><link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
 		<style>
 			#bg_container{
@@ -39,9 +43,7 @@
 			#button{
 				float:left;
 			}
-			#logo{
-				width: 50;
-			}
+			
 	
 		</style>
 	</head>
@@ -67,7 +69,15 @@
 			</div>
 		<form>
 			<div class="grid-block">
-				<div id="good" class="medium-3 grid-content">
+				<div id="good" class="medium-2 grid-content">
+					<!-- <form name="searchForm" class="input-group">
+		  			  	<input type="text" id="pac-input" class="form-control"  placeholder="Enter a city or zip code">
+						<button class="btn btn-md btn-info" id="submit" type="button">
+							<span class="glyphicon glyphicon-search">Search</span>
+						</button>
+						</span>
+					</form> -->
+
 					<label>
 					<b>Enter Zip Code</b>
 					<input placeholder="Zip Code" type="text">
@@ -192,7 +202,7 @@
 
 					
 		// // 			// Then display the remaining fields in the HTML (Section Name, Date, URL)
-					$("#tableWell-" + i).append('<p><span class="label label-primary">' + trailNum + "</span> | " + "<a href='/results'>" + trails[i].name + "</a>" + "</p>");
+					$("#tableWell-" + i).append('<p><span class="label label-primary">' + trailNum + "</span> | " + "<a href='/results'>" + trails[i].name + "</a>" + trails[i].description + "</p>");
 
 				 }
 				  
@@ -201,5 +211,7 @@
        }); //on click function       
 
     </script>
+  
+		
 	</body>
 </html>
