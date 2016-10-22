@@ -24,37 +24,39 @@ module.exports = function (app) {
 
 	// API NPM GET Requests
 	
-	app.get('/api/trailsnpm', function(req,res){
+	// app.get('/api/trailsnpm', function(req,res){
 		
-		 console.log("Request made" + req.params);
-		 // console.log("RESponse----" + res.params);
+	// 	 console.log("Request made" + req.params);
+	// 	 // console.log("RESponse----" + res.params);
 
 		
 		
-		tnt.getTrailhead(999, function(err, trailhead) {
-				if (err) {
-				throw err;
-				}
+	// 	tnt.getTrailhead(999, function(err, trailhead) {
+	// 			if (err) {
+	// 			throw err;
+	// 			}
 				
-				// console.log(trailhead)
+	// 			// console.log(trailhead)
 					
-		res.jsonp(trailhead);
+	// 	res.jsonp(trailhead);
 	
-		});
-	});	
+	// 	});
+	// });	
 
 
 	// API GET Requests
 
-	app.get('/api/trailsapi', function(req,res){
+	// app.get('/api/trailsapi/:long/:lat/', function(req,res){
+	app.get('/api/trailsapi/', function(req,res){	
 		var trailsURL = 'https://api.transitandtrails.org/api/v1/trailheads';
 		var key = '?key=2e5b17ab10f75e98ad4802a9301e8e7c253d3a4c50736c63e1d91170c7106550';
 
 
+		var limit = '&limit=5';
+
 		// var lat = req.params.lat;
 		// var long = req.params.long;
 	
-		var limit = '&limit=5';
 		var longitude = "&longitude=-118.243683";
 		var latitude = "&latitude=34.052235";
 		var distance = "&distance=15";

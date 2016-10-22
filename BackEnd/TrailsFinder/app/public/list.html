@@ -6,6 +6,11 @@
 
 	<!-- Latest compiled and minified CSS & JS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.js'></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtT4eWLXeyD60i6eAkY4cXttJMmyPqPPo&libraries=places"></script>
+  	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.css' rel='stylesheet'>
+
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
@@ -17,14 +22,33 @@
 		<div class="jumbotron">
 			<h1 class="text-center"><span class="glyphicon glyphicon-fire"></span> List Of Trails</h1>
 			<hr>
+				<div class="wrapper">
+						<div class="container">
+
+							<form name="searchForm" class="input-group">
+						    	<input type="text" id="pac-input" class="form-control"  placeholder="Enter a city or zip code">
+									<span class="input-group-btn">
+										<button class="btn btn-secondary" id="submit" type="sumbit">
+											<span class="glyphicon glyphicon-search"></span>
+										</button>
+									</span>
+							</form>
+
+				    	  <div id='map'></div>
+
+						</div>
+				</div>
+
 			<h2 class="text-center"> FROM Transit and Trails API </h2>
 			<br>
 
 			<div class="text-center">
 				<a href="/survey"><button type="button" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-credit-card"></span> Create Trail</button></a>		
 				<a href="/"><button type="button" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-home"></span></button></a>	
-				<button id="zipcodeBtn" type="button" class="btn btn-lg btn-success">NPM Trails</button>
-    			<p id="trailN"></p>
+
+				<!-- <button id="zipcodeBtn" type="button" class="btn btn-lg btn-success">NPM Trails</button>
+    			<p id="trailN"></p> -->
+    			
     			<button id="apiBtn" type="button" class="btn btn-lg btn-success">API Trails</button>
     				
 			</div>
@@ -215,4 +239,5 @@
 
 
 </script>
+<script type="text/javascript" src="maps_api.js"></script>
 </html>

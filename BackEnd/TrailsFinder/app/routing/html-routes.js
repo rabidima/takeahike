@@ -19,12 +19,15 @@ module.exports = function (app) {
 		res.sendFile(path.join(__dirname + '/../public/survey.html'));
 	});
 
-	app.get('/listoftrails', function (req, res) {
-			res.sendFile(path.join(__dirname + '/../public/list.html'));
+	app.get('/index', function (req, res) {
+			res.sendFile(path.join(__dirname + '/../public/index.html'));
+		});
+	app.get('/results', function (req, res) {
+			res.sendFile(path.join(__dirname + '/../public/results.html'));
 		});
 	
 	// If no matching route is found default to home
 	app.use(function (req, res) {
-		res.sendFile(path.join(__dirname + '/../public/home.html'));
+		res.sendFile(path.join(__dirname + '/../public/index.html'));
 	});
 };
