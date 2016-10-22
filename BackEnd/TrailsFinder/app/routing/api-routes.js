@@ -24,6 +24,7 @@ module.exports = function (app) {
 
 	// API NPM GET Requests
 	
+<<<<<<< HEAD
 	app.get('/api/trailsnpm', function(req,res){
 		
 		 console.log("Request made" + req.params);
@@ -42,6 +43,26 @@ module.exports = function (app) {
 	
 		});
 	});	
+=======
+	// app.get('/api/trailsnpm', function(req,res){
+		
+	// 	 console.log("Request made" + req.params);
+	// 	 // console.log("RESponse----" + res.params);
+
+		
+		
+	// 	tnt.getTrailhead(999, function(err, trailhead) {
+	// 			if (err) {
+	// 			throw err;
+	// 			}
+				
+	// 			// console.log(trailhead)
+					
+	// 	res.jsonp(trailhead);
+	
+	// 	});
+	// });	
+>>>>>>> dima
 
 
 	// API GET Requests
@@ -59,7 +80,11 @@ module.exports = function (app) {
 	
 		var longitude = "&longitude=-118.243683";
 		var latitude = "&latitude=34.052235";
+<<<<<<< HEAD
 		var distance = "&distance=5";
+=======
+		var distance = "&distance=15";
+>>>>>>> dima
 
 		//make request to trails api with lat long distance
 		request(trailsURL + key + longitude + latitude + limit + distance, function (error, response, body) {

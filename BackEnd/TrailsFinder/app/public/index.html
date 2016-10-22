@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Take a Hike</title>
+ 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/normalize.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/foundation.min.css">
+		<link href='http://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css' rel='stylesheet' type='text/css'>
+		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.css' rel='stylesheet'>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.js'></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtT4eWLXeyD60i6eAkY4cXttJMmyPqPPo&libraries=places"></script>
+		<script type="text/javascript" src="maps_api.js"></script>
+  
+		<!--doesnt work--><link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
+		<style>
+			#bg_container{
+				height:300px;
+				overflow:hidden;
+			}
+
+			video#bgvid{
+				width:100%;
+			}
+
+			#good{ 
+				display:inline-block;
+				margin-top: 15px;
+				margin-bottom: 15px;
+			}
+
+			#map{
+				position:relative;
+				right:20px;
+			}
+			#button{
+				float:left;
+			}
+			#logo{
+				width: 50;
+			}
+	
+		</style>
+	</head>
+	<body>
+		<div class="row">
+			<div class="large-12 columns">
+				<div class="nav-bar right">
+				<ul class="button-group">
+					<li><a href="#" class="hollow button">Sign Up</a></li>
+					<li><a href="#" class="hollow button">Log In</a></li>
+				</ul>
+				</div>
+			<a href="/index"><img src="http://i67.tinypic.com/flax6f.jpg" id="logo"></a>
+			<hr/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-12 columns">	
+				<div id="bg_container">
+				<video id="bgvid" autoplay="true" loop="true" muted="true" poster="http://">
+				<source src = "assets/Promo.mp4" type="video/mp4" />	
+				</video>
+			</div>
+		<form>
+			<div class="grid-block">
+				<div id="good" class="medium-3 grid-content">
+					<label>
+					<b>Enter Zip Code</b>
+					<input placeholder="Zip Code" type="text">
+						<div id="button">
+						<button id="apiBtn" type="button" class="btn btn-md btn-info">API Trails</button>
+						</div>
+					</label>
+				</div>
+				<div id="good" class="medium-3 grid-content">
+					<label><b>Trail Difficulty/Topography</b></label>
+					<select name="" id="">
+					<option value="">Moderate</option>
+					<option value="">Intermediate</option>
+					<option value="">Expert</option>
+					<option value="">Flat</option>
+					<option value="">Hilly</option>
+					<option value="">Jagged/Rocky</option>
+				</select>
+				</div>
+				</div>
+				</div>
+				</div>
+		</form>
+			<div class="row">
+			<div class="large-12 columns">
+			<div class="medium-6 columns" id="map">
+				<img src="https://camo.githubusercontent.com/6f53eeb8108ef87ccdb03ef0a8f51e9368be6e3a/68747470733a2f2f676f6f676c656d6170732e6769746875622e696f2f6a732d6d61702d6c6162656c2f73637265656e73686f742e706e67"</img>
+			</div>
+			<div class="medium-6 columns" id="map">
+			<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">Trails</h4>
+					</div>
+					<div class="panel-body" id="trailsDiv">
+					</div>
+				</div>
+			</div>
+			  <div id='map'></div>
+			</div>
+			</div>
+		<footer class="row">
+			<div class="large-12 columns">
+			<hr/>
+			<div class="row">
+			<div class="large-6 columns">
+			<p>© Copyright Take a Hike Inc.</p>
+			</div>
+			<div class="large-6 columns">
+				<ul class="inline-list right">
+					<li><a href="#"><img src="https://i.vimeocdn.com/portrait/9281150_50x50"></a></li>
+					<li><a href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_100_100/p/8/005/08f/05e/0c67963.png"></a></li>
+					<li><a href="#"><img src="http://menlopark.org/ImageRepository/Document?documentID=7258"></a></li>
+					<li><a href="#"><img src="http://unbouncepages-com.s3.amazonaws.com/services.socialsafe.net/instagram-backup/1dt663z-instagram.png"></a></li>
+				</ul>
+			</div>
+			</div>
+			</div>
+		</footer>
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/js/foundation.min.js"></script>
+	
+	 <script type="text/javascript">
+      $(document).foundation();
+
+     
+
+	// This function resets all of the data in list. 
+	function clearList(){
+
+		var currentURL = window.location.origin;
+		$.ajax({url: currentURL + "/api/clear", method: "POST"}) 
+
+	}
+
+	$("#clear").on('click', function(){
+		alert("Clearing...");
+		clearList();
+
+		// Refresh the page after data is cleared
+		location.reload();
+	})
+
+
+	// Run Queries
+	// ==========================================
+	
+
+
+        
+           
+// -----------------------------------
+
+
+     $('#apiBtn').on('click', function(event) {
+                   
+		console.log('hit');
+
+		    
+
+  //           // Here we get the location of the root page. 
+		var currentURL = window.location.origin;
+		console.log("currentURL : " + currentURL)
+		// // The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
+		$.ajax({url: currentURL + "/api/trailsapi", method: "GET"}) 
+			.done(function(trailsList) {
+				var trails = JSON.parse(trailsList);
+
+				console.log("-trailsList.length- :" + trails.length);
+
+				console.log("trailsList= " + trailsList);
+				
+		// 		// Loop through and display each of the friends 
+				for (var i=0; i<trails.length; i++){
+
+		// // 			// Create the HTML Well (Section) and Add the table content for each friend
+					var trailsDiv = $("<div>");
+					trailsDiv.addClass('well');
+					trailsDiv.attr('id', 'tableWell-' + i);
+					$('#trailsDiv').append(trailsDiv);
+
+					var trailNum = i + 1;
+
+					
+		// // 			// Then display the remaining fields in the HTML (Section Name, Date, URL)
+					$("#tableWell-" + i).append('<p><span class="label label-primary">' + trailNum + "</span> | " + "<a href='/results'>" + trails[i].name + "</a>" + "</p>");
+
+				 }
+				  
+				});
+ 
+       }); //on click function       
+
+    </script>
+	</body>
+</html>
