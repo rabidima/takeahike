@@ -19,8 +19,8 @@
 		<script type="text/javascript" src="maps_api.js"></script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.0/imagesloaded.pkgd.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.1/isotope.pkgd.min.js"></script>
-		<!--doesnt work--><link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
-		<style>
+		<!--doesnt work--><link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+		<!-- <style>
 			#bg_container{
 				height:300px;
 				overflow:hidden;
@@ -43,9 +43,16 @@
 			#button{
 				float:left;
 			}
-			
+		
+    
+      		#map { 
+      			height: 500px;
+      		 	width: 100%;
+      			margin-top: 5px;
+      	     }
+  
 	
-		</style>
+		</style> -->
 	</head>
 	<body>
 		<div class="row">
@@ -81,10 +88,11 @@
 					<label>
 					<b>Enter Zip Code</b>
 					<input placeholder="Zip Code" type="text">
+					</label>
 						<div id="button">
 						<button id="apiBtn" type="button" class="btn btn-md btn-info">API Trails</button>
 						</div>
-					</label>
+					
 				</div>
 				<div id="good" class="medium-3 grid-content">
 					<label><b>Trail Difficulty/Topography</b></label>
@@ -104,7 +112,24 @@
 			<div class="row">
 			<div class="large-12 columns">
 			<div class="medium-6 columns" id="map">
-				<img src="https://camo.githubusercontent.com/6f53eeb8108ef87ccdb03ef0a8f51e9368be6e3a/68747470733a2f2f676f6f676c656d6170732e6769746875622e696f2f6a732d6d61702d6c6162656c2f73637265656e73686f742e706e67"</img>
+
+
+					<!-- <div class="container"> -->
+						<form name="searchForm" class="input-group">
+				    	<input type="text" id="pac-input" class="form-control"  placeholder="Enter a city or ZIP code">
+						<span class="input-group-btn">
+						<button class="btn btn-secondary" id="submit" type="sumbit">
+  						<span class="glyphicon glyphicon-search"></span>
+						</button>
+						</span>
+						</form>
+
+			      <div id='map'></div>
+
+					
+				<!-- </div> -->
+
+				<!-- <img src="https://camo.githubusercontent.com/6f53eeb8108ef87ccdb03ef0a8f51e9368be6e3a/68747470733a2f2f676f6f676c656d6170732e6769746875622e696f2f6a732d6d61702d6c6162656c2f73637265656e73686f742e706e67"</img> -->
 			</div>
 			<div class="medium-6 columns" id="map">
 			<div class="panel panel-default">
@@ -142,9 +167,7 @@
 	 <script type="text/javascript">
       $(document).foundation();
 
-     
-
-	// This function resets all of the data in list. 
+    	// This function resets all of the data in list. 
 	function clearList(){
 
 		var currentURL = window.location.origin;
@@ -164,12 +187,6 @@
 	// Run Queries
 	// ==========================================
 	
-
-
-        
-           
-// -----------------------------------
-
 
      $('#apiBtn').on('click', function(event) {
                    

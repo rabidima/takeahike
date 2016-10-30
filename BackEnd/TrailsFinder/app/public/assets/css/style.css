@@ -17,6 +17,10 @@
 				position:relative;
 				right:20px;
 			}
+
+			#button{
+				float:right;
+			}
 /*//--------*/
 body {
   width: 99%;
